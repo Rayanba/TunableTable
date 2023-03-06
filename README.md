@@ -41,5 +41,9 @@ Tunable Table is an Arduino project, existed to create somehow a smart Lazy-Suza
 
 ### Controller
 
-
 ![Controller](pics/Controller.jpg)
+![PCB](pics/PCBGif.mp4)
+
+### Table 
+
+![Table](pics/TableGif.mp4)
