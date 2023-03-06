@@ -85,7 +85,7 @@ void setup()
  //////////////////////////--------LOOP----------/////////////////////////
 void loop()
 {
-  // set Vars
+  // Set Vars
   acceleration= analogRead(accelPotPin)/10*30;
   stepper.setAcceleration(acceleration);
   stepper.setCurrentPosition(0);
@@ -117,52 +117,54 @@ void loop()
   lcd.print("RD ");
   lcd.print(numOfRounds);
   lcd.print("  ");
-  // Black Button 1
+  // Steps Button 1
   if (buttonB1State == HIGH){
     if (stepsVal > 0 ){
       stepsVal -= 25;
       delay(80);
     }
   }
-  // Black Button 2
+  // Steps Button 2
   if (buttonB2State == HIGH){
     if (stepsVal < fullRound ){
       stepsVal = stepsVal + 25;
       delay(80);
     }
   }
-  // White Button 1 
+  // Speed Button 1 
   if (buttonW1State == HIGH){
     if (speedVal > 0 ){
       speedVal -= 25;
       delay(80);
     }
   }
-  // White Button 2 
+  // Speed Button 2 
   if (buttonW2State == HIGH){
     if (speedVal < stepperMaxSpeed){
       speedVal += 25;
       delay(80);
     }
   }
-  // Yellow Button 2 
+  // RunCW Button  
   if (buttonY2State == HIGH){
       long totalMove = stepsVal + (numOfRounds * fullRound);
       stepper.setMaxSpeed(speedVal);
       stepper.setAcceleration(acceleration);
       stepper.moveTo(totalMove);
   }
+  // RunCCW button 
   if (buttonY1State == HIGH){
       long totalMove = stepsVal + (numOfRounds * fullRound);
       stepper.setMaxSpeed(speedVal);
       stepper.setAcceleration(acceleration);
       stepper.moveTo(-totalMove);
-      
   }
+  // Do
   while (stepper.distanceToGo() != 0 ){
     
     stepper.run();
   }
+  // AjustmentCW button 
   if (buttonLoop1State == HIGH){
     long totalMove = stepsVal + (numOfRounds * fullRound);
     stepper.setMaxSpeed(speedVal);
@@ -170,6 +172,7 @@ void loop()
     stepper.moveTo(-totalMove);
     stepper.run();
   }
+  // AjustmentCCW button
   if (buttonLoop2State == HIGH){
     long totalMove = stepsVal + (numOfRounds * fullRound);
     stepper.setMaxSpeed(speedVal);
